@@ -1,0 +1,20 @@
+{
+    "webringSites": [
+        {
+            "siteOwner": "Jan",
+            "siteName": "tha HiPsTeR weblog",
+            "siteURL": "https://thahipster.de",
+            "siteFeedURL": "https://thahipster.de/rss/",
+            "siteShortDescription": "thahipster.de - Herr Montags Weblog from A to V - Tech, Vintage Computing and Tutorials",
+            "siteLongDescription": "A Weblog about Vintage Computing, Apple, Jailbreaks, HowTos, Hardware, Gadgets, Software, Tutorials and everything else."
+        },
+        {
+            "siteOwner": "Robert",
+            "siteName": "frittiert.es",
+            "siteURL": "https://frittiert.es",
+            "siteFeedURL": "https://frittiert.es/rss.xml",
+            "siteShortDescription": "frittiert.es",
+            "siteLongDescription": "It's all about the web here, at least that's what I'm trying to do. From opinions and practical guides to development projects and web technologies."
+        }
+    ]
+}

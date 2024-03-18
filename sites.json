@@ -20,20 +20,6 @@
             "siteURL": "https://pftnhr.xyz",
             "siteFeedURL": "https://pftnhr.xyz/feed/page:feed.xml",
             "siteDescription": "Hier geht’s um mich, das zumindest ist die Intention."
-        },
-        {
-            "siteOwner": "ratte/robert",
-            "siteName": "ratterobert.com",
-            "siteURL": "https://ratterobert.com",
-            "siteFeedURL": "",
-            "siteDescription": "öilkhgfdtghj"
-        },
-        {
-            "siteOwner": "Horst Hützel",
-            "siteName": "Hotte Hüs Pferdezucht",
-            "siteURL": "https://huetzel.org",
-            "siteFeedURL": "",
-            "siteDescription": "Unser Gestüt steht neben einem Schlachthof"
         }
     ]
 }

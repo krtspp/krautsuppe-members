@@ -15,6 +15,13 @@
             "siteFeedURL": "https://frittiert.es/rss.xml",
             "siteShortDescription": "frittiert.es",
             "siteLongDescription": "It's all about the web here, at least that's what I'm trying to do. From opinions and practical guides to development projects and web technologies."
+        },
+        {
+            "siteOwner": "Robert",
+            "siteName": "pftnhr.xyz",
+            "siteURL": "https://pftnhr.xyz",
+            "siteFeedURL": "https://pftnhr.xyz/feed/page:feed.xml",
+            "siteDescription": "Hier geht’s um mich, das zumindest ist die Intention."
         }
     ]
 }

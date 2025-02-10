@@ -19,6 +19,10 @@
     {
       "siteURL": "https://herrmontag.de",
       "siteFeedURL": "https://herrmontag.de/rss/"
+    },
+    {
+      "siteURL": "https://apfelhammer.de",
+      "siteFeedURL": "https://apfelhammer.de/feed.rss"
     }
   ]
 }

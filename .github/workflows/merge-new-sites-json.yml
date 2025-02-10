@@ -22,27 +22,38 @@ jobs:
         run: |
           FILE_PATH="sites.json"
           TEMP_FILES="sites/*.json"
-          
+      
           # Falls sites.json nicht existiert, erstelle eine leere Struktur
           if [ ! -f "$FILE_PATH" ]; then
             echo '{"webringSites": []}' > "$FILE_PATH"
           fi
-          
-          # JSON zusammenführen
-          jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
-          mv merged.json "$FILE_PATH"
-
-          # JSON-Dateien nach erfolgreicher Zusammenführung löschen
-          rm -f $TEMP_FILES
-
+      
+          # JSON zusammenführen (nur falls Dateien existieren)
+          if ls $TEMP_FILES 1> /dev/null 2>&1; then
+            jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
+            mv merged.json "$FILE_PATH"
+      
+            # JSON-Dateien nach erfolgreicher Zusammenführung löschen
+            rm -f $TEMP_FILES
+          fi
+      
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+          
+          # Stellt sicher, dass die Änderungen an sites.json aufgenommen werden
           git add sites.json
-          git add -u sites/  # Markiert gelöschte Dateien zum Commit
-          git commit -m "Merge accepted JSON files into sites.json"
+          
+          # Löscht leere Ordner (falls `sites/` leer wurde)
+          if [ -z "$(ls -A sites/ 2>/dev/null)" ]; then
+            rm -rf sites/
+            git add -u  # Stellt sicher, dass die Löschung aufgenommen wird
+          fi
+      
+          git commit -m "Merge accepted JSON files into sites.json and clean up temporary files" || echo "No changes to commit"
           git push
+
 
       - name: Delete Merged Files from Validate Branch
         run: |

@@ -1,0 +1,44 @@
+name: Merge JSON Files
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  merge-json:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Merge JSON Files
+        run: |
+          FILE_PATH="sites.json"
+          TEMP_FILES="sites/*.json"
+          
+          # Falls sites.json nicht existiert, erstelle eine leere Struktur
+          if [ ! -f "$FILE_PATH" ]; then
+            echo '{"webringSites": []}' > "$FILE_PATH"
+          fi
+          
+          # JSON zusammenführen
+          jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
+          mv merged.json "$FILE_PATH"
+
+          # JSON-Dateien nach erfolgreicher Zusammenführung löschen
+          rm -f $TEMP_FILES
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add sites.json
+          git commit -m "Merge accepted JSON files into sites.json"
+          git push

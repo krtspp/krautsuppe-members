@@ -15,6 +15,10 @@
         {
             "siteURL": "https://pftnhr.me",
             "siteFeedURL": "https://pftnhr.me/feed.xml"
+        },
+        {
+            "siteURL": "https://herrmontag.de",
+            "siteFeedURL": "https://herrmontag.de/rss/"
         }
     ]
 }

@@ -1,24 +1,24 @@
 {
-    "webringSites": [
-        {
-            "siteURL": "https://thahipster.de",
-            "siteFeedURL": "https://thahipster.de/rss/"
-        },
-        {
-            "siteURL": "https://frittiert.es",
-            "siteFeedURL": "https://frittiert.es/rss.xml"
-        },
-        {
-            "siteURL": "https://pftnhr.xyz",
-            "siteFeedURL": "https://pftnhr.xyz/feed/page:feed.xml"
-        },
-        {
-            "siteURL": "https://pftnhr.me",
-            "siteFeedURL": "https://pftnhr.me/feed.xml"
-        },
-        {
-            "siteURL": "https://herrmontag.de",
-            "siteFeedURL": "https://herrmontag.de/rss/"
-        }
-    ]
+  "webringSites": [
+    {
+      "siteURL": "https://thahipster.de",
+      "siteFeedURL": "https://thahipster.de/rss/"
+    },
+    {
+      "siteURL": "https://frittiert.es",
+      "siteFeedURL": "https://frittiert.es/rss.xml"
+    },
+    {
+      "siteURL": "https://pftnhr.xyz",
+      "siteFeedURL": "https://pftnhr.xyz/feed/page:feed.xml"
+    },
+    {
+      "siteURL": "https://pftnhr.me",
+      "siteFeedURL": "https://pftnhr.me/feed.xml"
+    },
+    {
+      "siteURL": "https://herrmontag.de",
+      "siteFeedURL": "https://herrmontag.de/rss/"
+    }
+  ]
 }

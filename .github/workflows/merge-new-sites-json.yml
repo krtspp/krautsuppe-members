@@ -40,5 +40,6 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add sites.json
+          git add -u sites/  # Markiert gelöschte Dateien zum Commit
           git commit -m "Merge accepted JSON files into sites.json"
           git push

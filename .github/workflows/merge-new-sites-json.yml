@@ -43,3 +43,11 @@ jobs:
           git add -u sites/  # Markiert gelöschte Dateien zum Commit
           git commit -m "Merge accepted JSON files into sites.json"
           git push
+
+      - name: Delete Merged Files from Validate Branch
+        run: |
+          git fetch origin validate
+          git checkout validate
+          git rm -f sites/*.json
+          git commit -m "Remove merged JSON files from validate branch" || echo "No changes to commit"
+          git push origin validate

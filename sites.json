@@ -11,6 +11,10 @@
         {
             "siteURL": "https://pftnhr.xyz",
             "siteFeedURL": "https://pftnhr.xyz/feed/page:feed.xml"
+        },
+        {
+            "siteURL": "https://pftnhr.me",
+            "siteFeedURL": "https://pftnhr.me/feed.xml"
         }
     ]
 }

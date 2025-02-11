@@ -32,11 +32,8 @@ jobs:
           if ls $TEMP_FILES 1> /dev/null 2>&1; then
             jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
             mv merged.json "$FILE_PATH"
-      
-            # JSON-Dateien nach erfolgreicher Zusammenführung löschen
-            # rm -f $TEMP_FILES
           fi
-      
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions"

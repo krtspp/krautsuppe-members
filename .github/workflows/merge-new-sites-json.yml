@@ -54,7 +54,6 @@ jobs:
           git commit -m "Merge accepted JSON files into sites.json and clean up temporary files" || echo "No changes to commit"
           git push
 
-
       - name: Delete Merged Files from Validate Branch
         run: |
           git fetch origin validate

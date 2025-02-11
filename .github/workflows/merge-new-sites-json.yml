@@ -20,7 +20,7 @@ jobs:
 
       - name: Merge JSON Files
         run: |
-          FILE_PATH="sites.json"
+          FILE_PATH="./sites.json"
           TEMP_FILES="sites/*.json"
       
           # Falls sites.json nicht existiert, erstelle eine leere Struktur

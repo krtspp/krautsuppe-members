@@ -43,18 +43,18 @@ jobs:
           git add sites.json
           
           # Löscht leere Ordner (falls `sites/` leer wurde)
-         # if [ -z "$(ls -A sites/ 2>/dev/null)" ]; then
-           # rm -rf sites/
-           # git add -u  # Stellt sicher, dass die Löschung aufgenommen wird
-         # fi
+          if [ -z "$(ls -A sites/ 2>/dev/null)" ]; then
+            rm -rf sites/
+            git add -u  # Stellt sicher, dass die Löschung aufgenommen wird
+          fi
       
           git commit -m "Merge accepted JSON files into sites.json and clean up temporary files" || echo "No changes to commit"
           git push
 
      # - name: Delete Merged Files from Validate Branch
-       # run: |
-         # git fetch origin validate
-         # git checkout validate
-         # git rm -f sites/*.json
-         # git commit -m "Remove merged JSON files from validate branch" || echo "No changes to commit"
-         # git push origin validate
+     #   run: |
+     #     git fetch origin validate
+     #     git checkout validate
+     #     git rm -f sites/*.json
+     #     git commit -m "Remove merged JSON files from validate branch" || echo "No changes to commit"
+     #     git push origin validate

@@ -21,19 +21,16 @@ jobs:
       - name: Merge JSON Files
         run: |
           FILE_PATH="sites.json"
-          TEMP_FILES="[0-9]*.json"
+          TEMP_FILES=$(ls [0-9]*.json 2>/dev/null || echo "")
 
           # Falls sites.json nicht existiert, erstelle eine leere Struktur
           if [ ! -f "$FILE_PATH" ]; then
             echo '{"webringSites": []}' > "$FILE_PATH"
           fi
 
-          # JSON zusammenführen (nur falls passende Dateien existieren)
-          if ls $TEMP_FILES 1> /dev/null 2>&1; then
-            jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
-            mv merged.json "$FILE_PATH"
-
-            # Nach erfolgreicher Zusammenführung passende Dateien löschen
+          # JSON zusammenführen, falls es Dateien gibt
+          if [ -n "$TEMP_FILES" ]; then
+            jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json && mv merged.json "$FILE_PATH"
             rm -f $TEMP_FILES
           fi
 
@@ -42,11 +39,11 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           
-          # Stellt sicher, dass die Änderungen an sites.json aufgenommen werden
+          # Stellt sicher, dass sites.json aufgenommen wird
           git add sites.json
           
-          # Stellt sicher, dass nur Dateien gelöscht werden, deren Name mit einer Ziffer beginnt
-          git add -u [0-9]*.json
+          # Löscht nur JSON-Dateien mit numerischem Namen
+          git ls-files --deleted | grep '^[0-9].*\.json$' | xargs -r git rm
 
           git commit -m "Merge accepted JSON files into sites.json and clean up temporary files" || echo "No changes to commit"
           git push

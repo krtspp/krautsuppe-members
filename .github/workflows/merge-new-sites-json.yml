@@ -17,6 +17,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          
+      - name: Debug File Listing
+        run: |
+          echo "Verfügbare Dateien im Repository:"
+          ls -la
+          echo "Verfügbare JSON-Dateien im sites/ Verzeichnis:"
+          ls -la sites/ || echo "Verzeichnis 'sites/' existiert nicht"
+      
+      - name: Debug JSON Merge
+        run: |
+          FILE_PATH="sites.json"
+          TEMP_FILES="[0-9]*.json"
+      
+          # Falls sites.json nicht existiert, erstelle eine leere Struktur
+          if [ ! -f "$FILE_PATH" ]; then
+            echo '{"webringSites": []}' > "$FILE_PATH"
+          fi
+      
+          # Prüfe, ob TEMP_FILES existieren
+          if ls $TEMP_FILES 1> /dev/null 2>&1; then
+            echo "Folgende Dateien werden verarbeitet: $TEMP_FILES"
+            jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
+            cat merged.json # Ausgabe der neuen Datei zur Kontrolle
+            mv merged.json "$FILE_PATH"
+          else
+            echo "Keine passenden JSON-Dateien gefunden."
+          fi
 
       - name: Merge JSON Files
         run: |

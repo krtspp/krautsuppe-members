@@ -38,7 +38,8 @@ jobs:
           # Prüfe, ob TEMP_FILES existieren
           if ls $TEMP_FILES 1> /dev/null 2>&1; then
             echo "Folgende Dateien werden verarbeitet: $TEMP_FILES"
-            jq -s '.' "$FILE_PATH" $TEMP_FILES > merged.json
+            jq -s '.[0][0].webringSites += .[1:] | .[0][0]' "$FILE_PATH" $TEMP_FILES > merged.json
+
             cat merged.json # Ausgabe der neuen Datei zur Kontrolle
             mv merged.json "$FILE_PATH"
           else
@@ -57,7 +58,8 @@ jobs:
 
           # JSON zusammenführen, falls es Dateien gibt
           if [ -n "$TEMP_FILES" ]; then
-            jq -s '.webringSites += .' "$FILE_PATH" $TEMP_FILES > merged.json
+            jq -s '.[0][0].webringSites += .[1:] | .[0][0]' "$FILE_PATH" $TEMP_FILES > merged.json
+
             rm -f $TEMP_FILES
           fi
 

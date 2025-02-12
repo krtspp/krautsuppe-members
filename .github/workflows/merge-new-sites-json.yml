@@ -22,8 +22,6 @@ jobs:
         run: |
           echo "Verfügbare Dateien im Repository:"
           ls -la
-          echo "Verfügbare JSON-Dateien im sites/ Verzeichnis:"
-          ls -la sites/ || echo "Verzeichnis 'sites/' existiert nicht"
       
       - name: Debug JSON Merge
         run: |

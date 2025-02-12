@@ -26,7 +26,9 @@ jobs:
       - name: Debug JSON Merge
         run: |
           FILE_PATH="sites.json"
-          TEMP_FILES="[0-9]*.json"
+          TEMP_FILES=$(ls [0-9]*.json 2>/dev/null || echo "")
+
+          echo "Gefundene JSON-Dateien: $TEMP_FILES"
       
           # Falls sites.json nicht existiert, erstelle eine leere Struktur
           if [ ! -f "$FILE_PATH" ]; then

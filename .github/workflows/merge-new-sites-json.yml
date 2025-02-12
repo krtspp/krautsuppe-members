@@ -20,33 +20,33 @@ jobs:
 
       - name: Merge JSON Files
         run: |
-          FILE_PATH="./sites.json"
-          TEMP_FILES="sites/[0-9]*.json"
-      
+          FILE_PATH="sites.json"
+          TEMP_FILES="[0-9]*.json"
+
           # Falls sites.json nicht existiert, erstelle eine leere Struktur
           if [ ! -f "$FILE_PATH" ]; then
             echo '{"webringSites": []}' > "$FILE_PATH"
           fi
-      
+
           # JSON zusammenführen (nur falls passende Dateien existieren)
           if ls $TEMP_FILES 1> /dev/null 2>&1; then
-            jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > ./merged.json
-            mv ./merged.json "$FILE_PATH"
-      
+            jq -s '.[0].webringSites += (.[1:] | map(.webringSites) | add) | .[0]' "$FILE_PATH" $TEMP_FILES > merged.json
+            mv merged.json "$FILE_PATH"
+
             # Nach erfolgreicher Zusammenführung passende Dateien löschen
             rm -f $TEMP_FILES
           fi
-      
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           
           # Stellt sicher, dass die Änderungen an sites.json aufgenommen werden
-          git add ./sites.json
+          git add sites.json
           
           # Stellt sicher, dass nur Dateien gelöscht werden, deren Name mit einer Ziffer beginnt
-          git add -u sites/[0-9]*.json
-      
+          git add -u [0-9]*.json
+
           git commit -m "Merge accepted JSON files into sites.json and clean up temporary files" || echo "No changes to commit"
           git push

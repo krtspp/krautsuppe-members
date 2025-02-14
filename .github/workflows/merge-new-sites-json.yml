@@ -58,8 +58,9 @@ jobs:
 
           # JSON zusammenführen, falls es Dateien gibt
           if [ -n "$TEMP_FILES" ]; then
-            jq -s '.[0][0].webringSites += .[1:] | .[0][0]' "$FILE_PATH" $TEMP_FILES > merged.json
+            jq -s '{webringSites: .[0].webringSites + .[1:]}' "$FILE_PATH" $TEMP_FILES > merged.json
 
+            mv merged.json "$FILE_PATH"
             rm -f $TEMP_FILES
           fi
 
